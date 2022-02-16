@@ -25,8 +25,8 @@ const particlesOptions = {
 const initialState = {
   input: '',
   imageUrl: '',
-  box: {},
-  route: 'signin',
+  boxes: [],
+  route: 'home',
   isSignedIn: false,
   user: {
     id: '',
