@@ -19,7 +19,7 @@ class ProfileIcon extends React.Component {
 
   render() {
     return (
-      <div class="pa4 tc">
+      <div className="pa4 tc">
         <Dropdown toggle={this.toggle} isOpen={this.state.dropDownOpen}>
           <DropdownToggle
             tag="span"
@@ -28,12 +28,14 @@ class ProfileIcon extends React.Component {
           >
             <img src="http://tachyons.io/img/logo.jpg" className="br-100 ba h3 w3 dib" alt="avatar"/>
           </DropdownToggle>
-          <DropdownMenu className='b--transparente shadow-5' style={{marginTop: '20px', backgroundColor: 'rgba(255, 255, 255, 0.5'}}>
+          <DropdownMenu right
+            className='b--transparente shadow-5' 
+            style={{marginTop: '20px', backgroundColor: 'rgba(255, 255, 255, 0.5'}}>
             <DropdownItem>
               View Profile
             </DropdownItem>
-            <DropdownItem>
-              signout
+            <DropdownItem onClick={() => this.props.onRouteChange('signout')}>
+              Sign Out
             </DropdownItem>
           </DropdownMenu>
         </Dropdown>
