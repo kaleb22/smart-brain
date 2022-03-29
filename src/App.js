@@ -29,7 +29,7 @@ const initialState = {
   input: '',
   imageUrl: '',
   boxes: [],
-  route: 'home',
+  route: 'signin',
   isSignedIn: true,
   isProfileOpen: false,
   user: {
@@ -147,7 +147,7 @@ class App extends Component {
         <Navigation isSignedIn={isSignedIn} onRouteChange={this.onRouteChange} toggleModal={this.toggleModal} />
         { isProfileOpen &&
          <Modal>
-          <Profile isProfileOpen={isProfileOpen} toggleModal={this.toggleModal} user={user}/>
+          <Profile isProfileOpen={isProfileOpen} toggleModal={this.toggleModal} user={user} loadUser={this.loadUser}/>
         </Modal> }
         { route === 'home'
           ? <div>
