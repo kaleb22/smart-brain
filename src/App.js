@@ -49,6 +49,44 @@ class App extends Component {
     this.state = initialState;
   }
 
+  componentDidMount() {
+    const token = window.sessionStorage.getItem('token');
+
+    if(token) {
+      fetch('http://localhost:3000/signin', {
+        method: 'post',
+        headers: {
+          'content-Type': 'application/json',
+          'Authorization': token
+        }
+      })
+      .then(res => res.json())
+      .then( data => {
+        if(data && data.id) {
+          this.getUser(data.id, token);
+        }
+      })
+      .catch(console.log('error'));
+    }
+  }
+
+  getUser = (id, token) => {
+    fetch(`http://localhost:3000/profile/${id}`, {
+      method: 'get',
+      headers: {
+        'content-Type': 'application/json',
+        'Authorization': token
+      }
+    })
+    .then(res => res.json())
+    .then(user => {
+      if(user && user.email) {
+        this.loadUser(user);
+        this.onRouteChange('home');
+      }
+    })
+  }
+
   loadUser = (data) => {
     this.setState({user: {
       id: data.id,
@@ -164,7 +202,7 @@ class App extends Component {
             </div>
           : (
              route === 'signin'
-             ? <Signin loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
+             ? <Signin loadUser={this.loadUser} onRouteChange={this.onRouteChange} getUser={this.getUser}/>
              : <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
             )
         }
