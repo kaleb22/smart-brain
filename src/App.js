@@ -66,7 +66,7 @@ class App extends Component {
           this.getUser(data.id, token);
         }
       })
-      .catch(console.log('error'));
+      .catch(err => console.log(err));
     }
   }
 
